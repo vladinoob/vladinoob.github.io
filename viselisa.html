@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Добро Пожаловать в мою больную игру</title>
+</head>
+<body>
+<h1>Добрый день!</h1>
+<p>Если хочешь начать мою больную игру просто обнови страницу.</p>
+<script>
+var words = [
+"пылесос",
+"телевизор",
+"чайник",
+"стол",
+"стул",
+"програмист"
+];
+var word = words[Math.floor(Math.random() * words.length)];
+var answerArray = [];
+for (var i = 0; i < word.length; i++) {
+answerArray[i] = "_";
+}
+var remainingLetters = word.length;
+var newRemainingLetters = remainingLetters;
+var lives = 5;
+while ((remainingLetters > 0) && (lives !== 0)) {
+// Показываем состояние игры
+alert("Осталось попыток: " + lives + "\n" + answerArray.join(" ") + "\n" + remainingLetters + " букв осталось");
+var guess = prompt("Угадайте букву, или нажмите Отмена для выхода из игры.");
+if (guess === null) {
+// Выходим из игрового цикла
+break;
+} else if (guess.length !== 1) {
+alert("Пожалуйста, введите одиночную букву.");
+} else {
+	guess = guess.toLowerCase();
+// Обновляем состояние игры
+for (var j = 0; j < word.length; j++) {
+	var letterWhatEntered = answerArray[j] === guess;
+	if (letterWhatEntered) {
+		alert("Вы уже угадали эту букву!");
+		break;
+	}
+if (word[j] === guess) {
+answerArray[j] = guess;
+remainingLetters--;
+}
+}
+}
+if (remainingLetters === newRemainingLetters) {
+	lives--;
+}
+newRemainingLetters = remainingLetters;
+}
+if (lives === 0) {
+	alert("Все ковбой! Наигрался! Правильное слово было: " + word);
+} else if (remainingLetters === 0) {
+	alert("Замечательно! Правильное слово: " + word)
+} else {
+	alert ("Хмммм..... хорошо, пока... =((")
+}
+//alert(answerArray.join(" "));
+//alert("Отлично! Было загадано слово " + word);
+</script>
+</body>
+</html>
